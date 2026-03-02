@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Readiness Scorecard — Joe Abrahams</title>
+<meta name="description" content="Take the free 2-minute AI Readiness Assessment and discover how prepared your business is for artificial intelligence.">
+<meta property="og:title" content="Is Your Business AI-Ready? — Free Assessment">
+<meta property="og:description" content="Take the free 2-minute AI Readiness Assessment. Get an instant scored report with actionable recommendations.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --navy: #0A0F1C;
+  --navy-light: #111827;
+  --navy-card: #151C2F;
+  --navy-border: #1E293B;
+  --blue: #3B82F6;
+  --blue-glow: rgba(59, 130, 246, 0.15);
+  --blue-dark: #2563EB;
+  --green: #10B981;
+  --yellow: #F59E0B;
+  --red: #EF4444;
+  --purple: #8B5CF6;
+  --white: #F8FAFC;
+  --gray: #94A3B8;
+  --gray-dim: #64748B;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Utility ─── */
+.container { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+
+/* ─── Hero ─── */
+.hero {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -40%; left: -20%;
+  width: 140%; height: 140%;
+  background: radial-gradient(ellipse at 50% 30%, rgba(59,130,246,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 100px;
+  background: var(--blue-glow);
+  border: 1px solid rgba(59,130,246,0.2);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--blue);
+  margin-bottom: 32px;
+  letter-spacing: 0.02em;
+}
+
+.hero-badge .dot {
+  width: 6px; height: 6px;
+  background: var(--blue);
+  border-radius: 50%;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 7vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero p {
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  color: var(--gray);
+  max-width: 480px;
+  margin-bottom: 40px;
+  font-weight: 400;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.btn-primary:hover {
+  background: var(--blue-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(59,130,246,0.3);
+}
+
+.btn-primary:active { transform: translateY(0); }
+
+.btn-primary svg { width: 18px; height: 18px; }
+
+.hero-credentials {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-credentials .name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--white);
+  opacity: 0.9;
+}
+
+.hero-credentials .title {
+  font-size: 12px;
+  color: var(--gray-dim);
+  font-weight: 400;
+}
+
+.hero-credentials .badges {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero-credentials .badges span {
+  font-size: 10px;
+  padding: 3px 10px;
+  border-radius: 100px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--gray);
+  font-weight: 500;
+}
+
+/* ─── Assessment ─── */
+.assessment {
+  display: none;
+  min-height: 100dvh;
+  padding: 40px 20px 60px;
+}
+
+.assessment.active { display: flex; flex-direction: column; align-items: center; }
+
+.progress-wrap {
+  width: 100%;
+  max-width: 720px;
+  margin-bottom: 40px;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.progress-header .category {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.progress-header .count {
+  font-size: 13px;
+  color: var(--gray-dim);
+  font-weight: 500;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background: var(--navy-border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue), var(--purple));
+  border-radius: 4px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 0%;
+}
+
+.question-card {
+  width: 100%;
+  max-width: 720px;
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-20px); }
+}
+
+.question-card h2 {
+  font-size: clamp(1.25rem, 4vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin-bottom: 32px;
+  color: var(--white);
+}
+
+.options { display: flex; flex-direction: column; gap: 12px; }
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 22px;
+  background: var(--navy-card);
+  border: 1px solid var(--navy-border);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.option:hover {
+  border-color: rgba(59,130,246,0.3);
+  background: rgba(59,130,246,0.05);
+  transform: translateX(4px);
+}
+
+.option:active { transform: translateX(2px) scale(0.995); }
+
+.option .marker {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: rgba(59,130,246,0.1);
+  border: 1px solid rgba(59,130,246,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--blue);
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.option:hover .marker {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+}
+
+.option .label {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1.4;
+}
+
+.option.selected {
+  border-color: var(--blue);
+  background: rgba(59,130,246,0.08);
+}
+
+.option.selected .marker {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+}
+
+/* ─── Processing ─── */
+.processing {
+  display: none;
+  min-height: 100dvh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.processing.active { display: flex; }
+
+.scan-ring {
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  border: 2px solid var(--navy-border);
+  border-top-color: var(--blue);
+  animation: spin 1s linear infinite;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.scan-ring::after {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: var(--purple);
+  animation: spin 1.5s linear infinite reverse;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.processing h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.processing p {
+  color: var(--gray);
+  font-size: 14px;
+}
+
+.processing .scan-items {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.processing .scan-item {
+  font-size: 13px;
+  color: var(--gray-dim);
+  opacity: 0;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* ─── Results ─── */
+.results {
+  display: none;
+  padding: 40px 20px 80px;
+}
+
+.results.active { display: block; }
+
+.results-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.results-header h2 {
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 8px;
+}
+
+.results-header p {
+  color: var(--gray);
+  font-size: 15px;
+}
+
+/* Score Circle */
+.score-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 48px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.score-section.visible {
+  animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.score-circle-wrap {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 24px;
+}
+
+.score-circle-wrap svg {
+  width: 200px;
+  height: 200px;
+  transform: rotate(-90deg);
+}
+
+.score-circle-bg {
+  fill: none;
+  stroke: var(--navy-border);
+  stroke-width: 8;
+}
+
+.score-circle-fill {
+  fill: none;
+  stroke: var(--blue);
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 502;
+  stroke-dashoffset: 502;
+  transition: stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.score-number {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.score-number .value {
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.score-number .total {
+  font-size: 14px;
+  color: var(--gray-dim);
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.rating-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border-radius: 100px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.rating-pioneer { background: rgba(16,185,129,0.12); color: var(--green); border: 1px solid rgba(16,185,129,0.2); }
+.rating-accelerator { background: rgba(59,130,246,0.12); color: var(--blue); border: 1px solid rgba(59,130,246,0.2); }
+.rating-explorer { background: rgba(245,158,11,0.12); color: var(--yellow); border: 1px solid rgba(245,158,11,0.2); }
+.rating-starter { background: rgba(239,68,68,0.12); color: var(--red); border: 1px solid rgba(239,68,68,0.2); }
+
+/* Radar Chart */
+.radar-section {
+  margin-bottom: 48px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.radar-section.visible {
+  animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+
+.section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.radar-wrap {
+  background: var(--navy-card);
+  border: 1px solid var(--navy-border);
+  border-radius: 20px;
+  padding: 32px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.radar-wrap svg text {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Category Breakdown */
+.categories-section {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.categories-section.visible {
+  animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+}
+
+.cat-card {
+  background: var(--navy-card);
+  border: 1px solid var(--navy-border);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 16px;
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+.cat-card.visible {
+  animation: fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.cat-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.cat-card-header h3 {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.cat-status {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+
+.status-strong { background: rgba(16,185,129,0.12); color: var(--green); }
+.status-developing { background: rgba(245,158,11,0.12); color: var(--yellow); }
+.status-attention { background: rgba(239,68,68,0.12); color: var(--red); }
+
+.cat-score-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--navy-border);
+  border-radius: 6px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.cat-score-fill {
+  height: 100%;
+  border-radius: 6px;
+  width: 0%;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cat-recs {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cat-recs li {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.5;
+  padding-left: 20px;
+  position: relative;
+}
+
+.cat-recs li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue);
+  opacity: 0.6;
+}
+
+/* ─── CTA ─── */
+.cta-section {
+  text-align: center;
+  padding: 64px 20px;
+  margin-top: 24px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.cta-section.visible {
+  animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+}
+
+.cta-section h2 {
+  font-size: clamp(1.4rem, 5vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+
+.cta-section .subtitle {
+  color: var(--gray);
+  font-size: 15px;
+  margin-bottom: 32px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 40px;
+  background: linear-gradient(135deg, var(--blue), var(--purple));
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.btn-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(59,130,246,0.3);
+}
+
+.cta-creds {
+  margin-top: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.cta-creds span {
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 100px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: var(--gray-dim);
+  font-weight: 500;
+}
+
+/* ─── Footer ─── */
+footer {
+  text-align: center;
+  padding: 32px 20px;
+  border-top: 1px solid var(--navy-border);
+}
+
+footer a {
+  color: var(--blue);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+  transition: color 0.2s;
+}
+
+footer a:hover { color: var(--purple); }
+
+footer p {
+  font-size: 12px;
+  color: var(--gray-dim);
+}
+
+/* ─── Responsive ─── */
+@media (min-width: 640px) {
+  .option { padding: 20px 28px; }
+  .radar-wrap { padding: 40px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="hero">
+  <div class="hero-badge">
+    <span class="dot"></span>
+    Free AI Assessment
+  </div>
+  <h1>Is Your Business<br>AI-Ready?</h1>
+  <p>Take the free 2-minute assessment and get an instant scored report with actionable recommendations.</p>
+  <button class="btn-primary" onclick="startAssessment()">
+    Start Assessment
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </button>
+  <div class="hero-credentials">
+    <span class="name">Joe Abrahams</span>
+    <span class="title">Helping businesses unlock the power of AI</span>
+    <div class="badges">
+      <span>IBM watsonx Certified</span>
+      <span>BSc Management (First Class)</span>
+      <span>Ex-IBM Consultant</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ASSESSMENT ─── -->
+<section class="assessment" id="assessment">
+  <div class="progress-wrap">
+    <div class="progress-header">
+      <span class="category" id="catLabel">AI Strategy</span>
+      <span class="count" id="qCount">1 of 10</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+  <div class="question-card" id="questionCard"></div>
+</section>
+
+<!-- ─── PROCESSING ─── -->
+<section class="processing" id="processing">
+  <div class="scan-ring"></div>
+  <h2>Analysing your responses</h2>
+  <p>Generating your personalised AI readiness report...</p>
+  <div class="scan-items" id="scanItems"></div>
+</section>
+
+<!-- ─── RESULTS ─── -->
+<section class="results" id="results">
+  <div class="container">
+    <div class="results-header">
+      <h2>Your AI Readiness Report</h2>
+      <p>Here's where your organisation stands — and what to do next.</p>
+    </div>
+
+    <div class="score-section" id="scoreSection">
+      <div class="score-circle-wrap">
+        <svg viewBox="0 0 180 180">
+          <circle class="score-circle-bg" cx="90" cy="90" r="80"/>
+          <circle class="score-circle-fill" id="scoreFill" cx="90" cy="90" r="80"/>
+        </svg>
+        <div class="score-number">
+          <span class="value" id="scoreValue">0</span>
+          <span class="total">out of 40</span>
+        </div>
+      </div>
+      <div id="ratingBadge"></div>
+    </div>
+
+    <div class="radar-section" id="radarSection">
+      <div class="section-title">Performance Overview</div>
+      <div class="radar-wrap">
+        <svg id="radarChart" width="300" height="300" viewBox="0 0 300 300"></svg>
+      </div>
+    </div>
+
+    <div class="categories-section" id="categoriesSection">
+      <div class="section-title">Category Breakdown</div>
+      <div id="catCards"></div>
+    </div>
+
+    <div class="cta-section" id="ctaSection">
+      <h2>Ready to accelerate<br>your AI journey?</h2>
+      <p class="subtitle">Get a personalised roadmap tailored to your organisation's unique position and goals.</p>
+      <a href="#" class="btn-cta">
+        Book a Free Strategy Call with Joe
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <div class="cta-creds">
+        <span>IBM watsonx Certified</span>
+        <span>Enterprise Design Thinking</span>
+        <span>BSc Management (First Class) — Nottingham</span>
+        <span>Ex-IBM &amp; Gate One Consultant</span>
+        <span>2,600+ LinkedIn Followers</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <p>Platform built by <a href="https://bluecanvas.ai" target="_blank" rel="noopener">Blue Canvas</a> — AI Consultancy</p>
+</footer>
+
+<script>
+const questions = [
+  { cat: "AI Strategy", q: "Does your organisation have a defined AI strategy aligned with business objectives?", opts: ["No strategy in place", "Informal discussions only", "Documented but not yet implemented", "Fully implemented and measured"] },
+  { cat: "AI Strategy", q: "How does your leadership team view AI investment?", opts: ["Not a priority", "Curious but cautious", "Actively exploring opportunities", "Strategic priority with dedicated budget"] },
+  { cat: "Data Infrastructure", q: "How would you describe your organisation's data quality and accessibility?", opts: ["Siloed and inconsistent", "Some centralisation efforts underway", "Well-organised with some gaps", "Unified, clean, and readily accessible"] },
+  { cat: "Data Infrastructure", q: "Do you have data governance policies in place?", opts: ["No formal policies", "Basic guidelines exist", "Documented policies, partial enforcement", "Comprehensive framework, fully enforced"] },
+  { cat: "Team & Skills", q: "Does your team have AI/ML skills or experience?", opts: ["No AI skills internally", "A few self-taught enthusiasts", "Some trained staff or external support", "Dedicated AI team or strong partnerships"] },
+  { cat: "Team & Skills", q: "How would you rate your organisation's AI literacy across departments?", opts: ["Very low awareness", "Some awareness in IT/tech teams", "Growing awareness across departments", "High literacy — AI is part of the culture"] },
+  { cat: "Technology Stack", q: "Are your current systems and infrastructure ready to support AI workloads?", opts: ["Legacy systems, major upgrades needed", "Some cloud adoption, work in progress", "Cloud-first with modern architecture", "Fully cloud-native, AI-ready infrastructure"] },
+  { cat: "Technology Stack", q: "Do you currently use any AI or automation tools?", opts: ["None", "Basic automation (e.g. RPA)", "Some AI tools in specific departments", "AI integrated across multiple business functions"] },
+  { cat: "Governance & Ethics", q: "Do you have policies for responsible AI use?", opts: ["Haven't considered it", "Aware of the need, but no action taken", "Some guidelines in development", "Comprehensive responsible AI framework"] },
+  { cat: "Governance & Ethics", q: "How prepared is your organisation for AI-related regulations (e.g., EU AI Act)?", opts: ["Unaware of requirements", "Aware but not prepared", "Actively preparing", "Fully compliant with monitoring in place"] }
+];
+
+const catNames = ["AI Strategy", "Data Infrastructure", "Team & Skills", "Technology Stack", "Governance & Ethics"];
+
+const recommendations = {
+  "AI Strategy": {
+    low: ["Define a clear AI vision aligned with your top 3 business objectives", "Identify one high-impact pilot project to build internal momentum", "Establish an AI steering committee with senior leadership"],
+    mid: ["Formalise your AI strategy with measurable KPIs and quarterly reviews", "Allocate dedicated budget for AI experimentation and scaling", "Map AI opportunities to each business unit's strategic priorities"],
+    high: ["Continue iterating on your strategy with emerging AI capabilities", "Share your AI journey externally to attract talent and partnerships", "Explore advanced AI applications like agentic workflows and multi-model orchestration"]
+  },
+  "Data Infrastructure": {
+    low: ["Audit existing data sources and map data flows across your organisation", "Invest in a centralised data platform or lakehouse architecture", "Implement basic data quality checks and cleansing processes"],
+    mid: ["Strengthen data governance with clear ownership and accountability", "Build automated data pipelines to reduce manual preparation effort", "Ensure data cataloguing and lineage tracking are in place"],
+    high: ["Explore real-time data streaming for time-sensitive AI applications", "Implement advanced data observability and anomaly detection", "Consider data mesh architecture for decentralised domain ownership"]
+  },
+  "Team & Skills": {
+    low: ["Launch an AI literacy programme covering fundamentals for all staff", "Identify internal champions who can bridge AI and business knowledge", "Partner with external consultants or universities for specialist capability"],
+    mid: ["Develop structured upskilling pathways for technical and non-technical roles", "Create cross-functional AI squads to drive specific use cases", "Establish a mentoring programme pairing AI-skilled staff with business leads"],
+    high: ["Invest in advanced training: MLOps, responsible AI, and AI product management", "Build a community of practice to share learnings across the organisation", "Consider an internal AI academy or certification programme"]
+  },
+  "Technology Stack": {
+    low: ["Prioritise cloud migration for core systems that will underpin AI workloads", "Evaluate managed AI/ML platforms to reduce infrastructure complexity", "Ensure API-first architecture for seamless AI integration"],
+    mid: ["Consolidate your AI toolchain and establish standard development environments", "Implement MLOps practices for model versioning, testing, and deployment", "Assess edge computing requirements for latency-sensitive AI applications"],
+    high: ["Explore multi-cloud and hybrid strategies for resilience and flexibility", "Invest in GPU/TPU infrastructure or serverless AI compute for scale", "Evaluate emerging platforms for generative AI and foundation model hosting"]
+  },
+  "Governance & Ethics": {
+    low: ["Begin with a responsible AI principles document endorsed by leadership", "Conduct an initial AI risk assessment covering bias, privacy, and security", "Assign a responsible AI lead to coordinate policy development"],
+    mid: ["Implement AI impact assessments for all new AI projects before deployment", "Establish model monitoring for drift, bias, and performance degradation", "Create clear escalation paths and human oversight mechanisms"],
+    high: ["Develop a public transparency report on your AI governance practices", "Engage in industry working groups and regulatory sandboxes", "Build automated compliance tooling integrated into your AI development lifecycle"]
+  }
+};
+
+let current = 0;
+let scores = new Array(10).fill(0);
+
+function startAssessment() {
+  document.getElementById('hero').style.display = 'none';
+  document.getElementById('assessment').classList.add('active');
+  renderQuestion();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderQuestion() {
+  const q = questions[current];
+  const card = document.getElementById('questionCard');
+  document.getElementById('catLabel').textContent = q.cat;
+  document.getElementById('qCount').textContent = `${current + 1} of 10`;
+  document.getElementById('progressFill').style.width = `${(current / 10) * 100}%`;
+
+  card.style.animation = 'none';
+  card.offsetHeight;
+  card.style.animation = 'slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+
+  card.innerHTML = `
+    <h2>${q.q}</h2>
+    <div class="options">
+      ${q.opts.map((o, i) => `
+        <div class="option" onclick="selectOption(${i + 1})" role="button" tabindex="0">
+          <div class="marker">${String.fromCharCode(65 + i)}</div>
+          <div class="label">${o}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function selectOption(val) {
+  scores[current] = val;
+  const opts = document.querySelectorAll('.option');
+  opts[val - 1].classList.add('selected');
+
+  setTimeout(() => {
+    current++;
+    if (current < 10) {
+      renderQuestion();
+    } else {
+      document.getElementById('progressFill').style.width = '100%';
+      setTimeout(showProcessing, 300);
+    }
+  }, 300);
+}
+
+function showProcessing() {
+  document.getElementById('assessment').classList.remove('active');
+  document.getElementById('processing').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  const items = ["Evaluating AI strategy maturity...", "Assessing data infrastructure...", "Analysing team capabilities...", "Reviewing technology readiness...", "Checking governance framework..."];
+  const container = document.getElementById('scanItems');
+
+  items.forEach((item, i) => {
+    setTimeout(() => {
+      const el = document.createElement('div');
+      el.className = 'scan-item';
+      el.style.animationDelay = '0s';
+      el.textContent = `✓ ${item}`;
+      container.appendChild(el);
+    }, 500 + i * 500);
+  });
+
+  setTimeout(showResults, 3500);
+}
+
+function showResults() {
+  document.getElementById('processing').classList.remove('active');
+  document.getElementById('results').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  const total = scores.reduce((a, b) => a + b, 0);
+  const catScores = [];
+  for (let i = 0; i < 5; i++) {
+    catScores.push(scores[i * 2] + scores[i * 2 + 1]);
+  }
+
+  // Animate score
+  setTimeout(() => {
+    document.getElementById('scoreSection').classList.add('visible');
+    animateScore(total);
+    const circ = document.getElementById('scoreFill').getTotalLength ? 502 : 502;
+    const pct = total / 40;
+    document.getElementById('scoreFill').style.strokeDashoffset = 502 - (502 * pct);
+
+    // Color based on score
+    const fill = document.getElementById('scoreFill');
+    if (total >= 32) fill.style.stroke = 'var(--green)';
+    else if (total >= 24) fill.style.stroke = 'var(--blue)';
+    else if (total >= 16) fill.style.stroke = 'var(--yellow)';
+    else fill.style.stroke = 'var(--red)';
+
+    // Rating badge
+    let rating, ratingClass;
+    if (total >= 32) { rating = '🚀 Pioneer'; ratingClass = 'rating-pioneer'; }
+    else if (total >= 24) { rating = '⚡ Accelerator'; ratingClass = 'rating-accelerator'; }
+    else if (total >= 16) { rating = '🔍 Explorer'; ratingClass = 'rating-explorer'; }
+    else { rating = '🌱 Starter'; ratingClass = 'rating-starter'; }
+    document.getElementById('ratingBadge').innerHTML = `<div class="rating-badge ${ratingClass}">${rating}</div>`;
+  }, 200);
+
+  // Radar chart
+  setTimeout(() => {
+    document.getElementById('radarSection').classList.add('visible');
+    setTimeout(() => drawRadar(catScores), 300);
+  }, 400);
+
+  // Category cards
+  setTimeout(() => {
+    document.getElementById('categoriesSection').classList.add('visible');
+    renderCategories(catScores);
+  }, 600);
+
+  // CTA
+  setTimeout(() => {
+    document.getElementById('ctaSection').classList.add('visible');
+  }, 800);
+}
+
+function animateScore(target) {
+  let current = 0;
+  const el = document.getElementById('scoreValue');
+  const duration = 1500;
+  const start = performance.now();
+
+  function tick(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    current = Math.round(eased * target);
+    el.textContent = current;
+    if (progress < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+function drawRadar(catScores) {
+  const svg = document.getElementById('radarChart');
+  const cx = 150, cy = 150, maxR = 110;
+  const labels = ["AI Strategy", "Data", "Team & Skills", "Tech Stack", "Governance"];
+  const n = 5;
+
+  let html = '';
+
+  // Grid rings
+  for (let r = 1; r <= 4; r++) {
+    const radius = (r / 4) * maxR;
+    let points = '';
+    for (let i = 0; i < n; i++) {
+      const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+      points += `${cx + radius * Math.cos(angle)},${cy + radius * Math.sin(angle)} `;
+    }
+    html += `<polygon points="${points}" fill="none" stroke="${r === 4 ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.04)'}" stroke-width="1"/>`;
+  }
+
+  // Axis lines
+  for (let i = 0; i < n; i++) {
+    const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+    html += `<line x1="${cx}" y1="${cy}" x2="${cx + maxR * Math.cos(angle)}" y2="${cy + maxR * Math.sin(angle)}" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>`;
+  }
+
+  // Data polygon
+  let dataPoints = '';
+  for (let i = 0; i < n; i++) {
+    const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+    const val = catScores[i] / 8;
+    const r = val * maxR;
+    dataPoints += `${cx + r * Math.cos(angle)},${cy + r * Math.sin(angle)} `;
+  }
+
+  html += `<polygon points="${dataPoints}" fill="rgba(59,130,246,0.15)" stroke="var(--blue)" stroke-width="2" stroke-linejoin="round" class="radar-polygon"/>`;
+
+  // Data points
+  for (let i = 0; i < n; i++) {
+    const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+    const val = catScores[i] / 8;
+    const r = val * maxR;
+    html += `<circle cx="${cx + r * Math.cos(angle)}" cy="${cy + r * Math.sin(angle)}" r="4" fill="var(--blue)" stroke="#fff" stroke-width="1.5"/>`;
+  }
+
+  // Labels
+  for (let i = 0; i < n; i++) {
+    const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+    const lx = cx + (maxR + 22) * Math.cos(angle);
+    const ly = cy + (maxR + 22) * Math.sin(angle);
+    const anchor = Math.abs(Math.cos(angle)) < 0.1 ? 'middle' : (Math.cos(angle) > 0 ? 'start' : 'end');
+    html += `<text x="${lx}" y="${ly}" text-anchor="${anchor}" dominant-baseline="central" fill="#94A3B8" font-size="11" font-weight="500">${labels[i]}</text>`;
+  }
+
+  svg.innerHTML = html;
+
+  // Animate polygon
+  const polygon = svg.querySelector('.radar-polygon');
+  if (polygon) {
+    const finalPoints = polygon.getAttribute('points');
+    let zeroPoints = '';
+    for (let i = 0; i < n; i++) {
+      zeroPoints += `${cx},${cy} `;
+    }
+    polygon.setAttribute('points', zeroPoints);
+    requestAnimationFrame(() => {
+      polygon.style.transition = 'all 1s cubic-bezier(0.4, 0, 0.2, 1)';
+      polygon.setAttribute('points', finalPoints);
+    });
+  }
+}
+
+function renderCategories(catScores) {
+  const container = document.getElementById('catCards');
+  container.innerHTML = '';
+
+  catNames.forEach((cat, i) => {
+    const score = catScores[i];
+    const maxScore = 8;
+    const pct = (score / maxScore) * 100;
+
+    let status, statusClass, recsKey, color;
+    if (score >= 7) { status = 'Strong'; statusClass = 'status-strong'; recsKey = 'high'; color = 'var(--green)'; }
+    else if (score >= 4) { status = 'Developing'; statusClass = 'status-developing'; recsKey = 'mid'; color = 'var(--yellow)'; }
+    else { status = 'Needs Attention'; statusClass = 'status-attention'; recsKey = 'low'; color = 'var(--red)'; }
+
+    const recs = recommendations[cat][recsKey];
+
+    const card = document.createElement('div');
+    card.className = 'cat-card';
+    card.innerHTML = `
+      <div class="cat-card-header">
+        <h3>${cat}</h3>
+        <span class="cat-status ${statusClass}">${score}/${maxScore} · ${status}</span>
+      </div>
+      <div class="cat-score-bar"><div class="cat-score-fill" style="background: ${color};" data-width="${pct}%"></div></div>
+      <ul class="cat-recs">
+        ${recs.map(r => `<li>${r}</li>`).join('')}
+      </ul>
+    `;
+    container.appendChild(card);
+
+    setTimeout(() => {
+      card.classList.add('visible');
+      card.querySelector('.cat-score-fill').style.width = `${pct}%`;
+    }, 200 + i * 150);
+  });
+}
+
+// Keyboard support
+document.addEventListener('keydown', (e) => {
+  if (document.getElementById('assessment').classList.contains('active')) {
+    const key = e.key.toLowerCase();
+    if (key === 'a') selectOption(1);
+    else if (key === 'b') selectOption(2);
+    else if (key === 'c') selectOption(3);
+    else if (key === 'd') selectOption(4);
+  }
+});
+</script>
+
+</body>
+</html>
